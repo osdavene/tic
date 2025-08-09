@@ -15,8 +15,8 @@
         - Module 4 (Security): Goal: Test/Reinforce -> Method: Interactive quiz with immediate feedback. Interaction: Users answer safety scenarios. Justification: Active recall improves memory.
         - Module 5 (Comp. Thinking): Goal: Apply/Organize -> Method: Interactive algorithm builder. Interaction: Users order steps to solve a problem. Justification: Demonstrates the importance of sequence.
         - Module 6 (Scratch): Goal: Demonstrate/Inform -> Method: Clickable infographic of the Scratch interface. Interaction: Click parts to learn their function. Justification: Deconstructs a complex UI.
-        - Module 7 (Robotics): Goal: Create/Apply -> Method: "Robot Builder" tool. Interaction: Users select components to design a virtual robot. Justification: Fosters creativity and applies concepts.
-        - Library/Method: All interactions are built with vanilla JavaScript and styled with Tailwind CSS to maintain a lightweight, single-file structure.
+        - Module 7 (Arduino): Goal: Inform/Prepare -> Method: Interactive definitions of electronic components. Interaction: Users learn about sensors and actuators with examples. Justification: Builds foundational knowledge for the final robotics project.
+        - Module 8 (Robotics): Goal: Synthesize/Apply -> Method: "Robot Builder" tool. Interaction: Users apply all learned concepts to design a robot. Justification: Serves as a capstone project, integrating all modules.
     -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
     <style>
@@ -108,8 +108,11 @@
         <a href="#scratch" data-section="scratch" class="nav-link w-full flex items-center justify-center lg:justify-start p-3 lg:px-6 rounded-r-full">
             <span class="text-2xl">🐱</span><span class="ml-4 hidden lg:inline">Programación</span>
         </a>
+        <a href="#arduino" data-section="arduino" class="nav-link w-full flex items-center justify-center lg:justify-start p-3 lg:px-6 rounded-r-full">
+            <span class="text-2xl">⚙️</span><span class="ml-4 hidden lg:inline">Arduino</span>
+        </a>
         <a href="#robotics" data-section="robotics" class="nav-link w-full flex items-center justify-center lg:justify-start p-3 lg:px-6 rounded-r-full">
-            <span class="text-2xl">🤖</span><span class="ml-4 hidden lg:inline">Robótica</span>
+            <span class="text-2xl">🤖</span><span class="ml-4 hidden lg:inline">Proyecto: Robótica</span>
         </a>
     </nav>
 
@@ -221,10 +224,37 @@
             </div>
         </section>
 
-        <!-- Module 7: Robotics -->
+        <!-- Module 7: Arduino -->
+        <section id="arduino" class="min-h-screen py-16">
+            <h2 class="section-title text-4xl font-bold text-gray-800">Introducción a Arduino Uno</h2>
+            <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto text-justify">Arduino es una plataforma de hardware y software de código abierto, basada en una placa con un microcontrolador y un entorno de desarrollo que permite escribir y cargar programas fácilmente. Es como un pequeño cerebro programable que puedes conectar a componentes electrónicos para crear proyectos interactivos. Arduino es el puente perfecto entre el mundo digital del código y el mundo físico, permitiéndote dar vida a tus ideas, desde un simple LED parpadeante hasta un robot complejo.</p>
+            
+            <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-700 text-center">Sensores Comunes</h3>
+                    <p class="text-gray-600 mt-2 text-center text-justify">Los sensores son los "sentidos" de tu robot. Le permiten percibir el mundo. Haz clic para aprender sobre algunos de ellos.</p>
+                    <div id="arduino-sensors" class="space-y-4 mt-4">
+                        <!-- Arduino sensors will be injected here by JS -->
+                    </div>
+                </div>
+                <div>
+                    <h3 class="text-2xl font-bold text-gray-700 text-center">Actuadores Comunes</h3>
+                    <p class="text-gray-600 mt-2 text-center text-justify">Los actuadores son los "músculos" de tu robot. Le permiten actuar y moverse. Haz clic para conocerlos.</p>
+                    <div id="arduino-actuators" class="space-y-4 mt-4">
+                        <!-- Arduino actuators will be injected here by JS -->
+                    </div>
+                </div>
+            </div>
+             <div class="mt-16">
+                <h3 class="text-2xl font-bold text-gray-700 text-center">¡Ahora a Construir!</h3>
+                <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto text-justify">Ahora que conoces los componentes básicos de Arduino, estás listo para el último paso. En el siguiente módulo, **'Proyecto: Robótica'**, aplicarás todo lo aprendido para diseñar un robot funcional para Tierralta, usando Arduino como su cerebro.</p>
+            </div>
+        </section>
+
+        <!-- Module 8: Robotics -->
         <section id="robotics" class="min-h-screen py-16">
-            <h2 class="section-title text-4xl font-bold text-gray-800">Diseña tu Propio Robot</h2>
-            <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto text-justify">La robótica combina ingeniería, electrónica y programación para crear máquinas que nos ayudan. Ahora es tu turno de ser un ingeniero. Diseña un robot para resolver un problema específico de Tierralta.</p>
+            <h2 class="section-title text-4xl font-bold text-gray-800">Proyecto Final: Diseña tu Robot</h2>
+            <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto text-justify">Es hora de unir todo lo que hemos aprendido. Usando los conceptos de sensores y actuadores de Arduino, diseña un robot para resolver un problema específico de Tierralta. ¡Tu imaginación es el límite!</p>
 
             <div class="mt-12 max-w-2xl mx-auto">
                 <div class="bg-white p-8 rounded-xl shadow-lg space-y-6">
@@ -241,7 +271,7 @@
                     <div>
                         <label for="robot-sensor" class="block font-semibold text-gray-700">2. Elige su sensor principal (sus "ojos"):</label>
                         <select id="robot-sensor" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
-                            <option value="una cámara para detectar basura">Cámara para detectar basura</option>
+                            <option value="un sensor ultrasónico para detectar basura">Sensor Ultrasónico para detectar basura</option>
                             <option value="un sensor de humedad para la tierra">Sensor de humedad del suelo</option>
                             <option value="un GPS para navegar el parque">GPS para navegar el parque</option>
                             <option value="un sensor de partículas para el aire">Sensor de partículas</option>
@@ -250,9 +280,9 @@
                     <div>
                         <label for="robot-actuator" class="block font-semibold text-gray-700">3. Elige su actuador principal (sus "músculos"):</label>
                         <select id="robot-actuator" class="mt-1 block w-full p-2 border border-gray-300 rounded-md">
-                            <option value="brazos robóticos para recoger objetos">Brazos robóticos para recoger</option>
+                            <option value="servomotores en sus brazos para recoger objetos">Servomotores para recoger objetos</option>
                             <option value="un sistema de aspersión de agua">Sistema de aspersión de agua</option>
-                            <option value="un altavoz para dar información">Altavoz para dar información</option>
+                            <option value="un zumbador y LEDs para dar alertas">Zumbador y LEDs para dar alertas</option>
                             <option value="ruedas todo terreno para moverse">Ruedas todo terreno</option>
                         </select>
                     </div>
@@ -350,7 +380,19 @@ document.addEventListener('DOMContentLoaded', function () {
             { id: 4, text: 'Decorar el lugar de la fiesta' },
             { id: 5, text: 'Poner la música' },
             { id: 6, text: '¡Disfrutar la fiesta!' }
-        ]
+        ],
+        arduino: {
+            sensors: [
+                { title: 'Sensor Ultrasónico', desc: 'Mide la distancia a un objeto enviando ondas de sonido que rebotan. Funciona de manera similar a como lo hacen los murciélagos o los delfines para navegar. Es un componente fundamental en robótica para la evasión de obstáculos.', example: 'Ejemplo de uso: Programar un robot para que se detenga y gire si detecta una pared a menos de 20 centímetros de distancia.' },
+                { title: 'Sensor de Temperatura y Humedad (DHT11)', desc: 'Este sensor digital puede medir tanto la temperatura del aire como la humedad relativa. Es muy útil para proyectos de monitoreo ambiental, automatización del hogar o estaciones meteorológicas caseras.', example: 'Ejemplo de uso: Crear un sistema que active un pequeño ventilador automáticamente cuando la temperatura en una habitación supere los 28°C.' },
+                { title: 'Fotorresistencia (LDR)', desc: 'Es una resistencia que cambia su valor dependiendo de la cantidad de luz que incide sobre ella. A más luz, menor resistencia. Es una forma muy sencilla y económica de detectar niveles de luminosidad.', example: 'Ejemplo de uso: Construir un sistema de alumbrado público a escala que encienda un LED automáticamente cuando la luz ambiental baje de cierto nivel (se haga de noche).' }
+            ],
+            actuators: [
+                { title: 'Servomotor', desc: 'Es un tipo especial de motor que permite controlar la posición angular de su eje con gran precisión. En lugar de girar continuamente, puedes ordenarle que se mueva a un ángulo específico (por ejemplo, 90 grados) y se mantenga firme en esa posición.', example: 'Ejemplo de uso: Crear el brazo de un robot que pueda subir y bajar para recoger un objeto pequeño.' },
+                { title: 'Diodo LED', desc: 'Un LED (Diodo Emisor de Luz) es un componente electrónico que emite luz cuando la corriente pasa a través de él. Son muy eficientes y vienen en muchos colores. Son el primer paso ideal para aprender a controlar salidas con Arduino.', example: 'Ejemplo de uso: Programar una secuencia de luces intermitentes, como las de un semáforo o las luces de un auto fantástico.' },
+                { title: 'Zumbador (Buzzer)', desc: 'Es un pequeño altavoz que produce sonidos o pitidos a una frecuencia determinada. Puede ser pasivo (necesita una señal oscilante para sonar) o activo (suena con solo recibir energía). Es excelente para dar retroalimentación auditiva.', example: 'Ejemplo de uso: Diseñar una alarma para tu habitación que suene si un sensor de distancia detecta que alguien se acerca a la puerta.' }
+            ]
+        }
     };
 
     const modal = document.getElementById('definition-modal');
@@ -590,19 +632,58 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function initRobotBuilder() {
-        const btn = document.getElementById('design-robot-btn');
-        const resultDiv = document.getElementById('robot-result');
-        const descP = document.getElementById('robot-description');
+        const container = document.getElementById('robotics');
+        const btn = container.querySelector('#design-robot-btn');
+        const resultDiv = container.querySelector('#robot-result');
+        const descP = container.querySelector('#robot-description');
 
         btn.addEventListener('click', () => {
-            const task = document.getElementById('robot-task').value;
-            const sensor = document.getElementById('robot-sensor').value;
-            const actuator = document.getElementById('robot-actuator').value;
+            const task = container.querySelector('#robot-task').value;
+            const sensor = container.querySelector('#robot-sensor').value;
+            const actuator = container.querySelector('#robot-actuator').value;
 
             descP.textContent = `Este robot está diseñado para ${task}. Utiliza ${sensor} y está equipado con ${actuator} para cumplir su misión. ¡Un gran invento para Tierralta!`;
             resultDiv.classList.remove('hidden');
         });
     }
+
+    function initArduinoModule() {
+        const sensorsContainer = document.getElementById('arduino-sensors');
+        const actuatorsContainer = document.getElementById('arduino-actuators');
+
+        sensorsContainer.innerHTML = content.arduino.sensors.map(item => `
+            <div class="module-card bg-white p-4 rounded-xl shadow-lg cursor-pointer" data-type="sensor" data-title="${item.title}">
+                <h4 class="text-xl font-bold text-gray-800 pointer-events-none">${item.title}</h4>
+            </div>
+        `).join('');
+
+        actuatorsContainer.innerHTML = content.arduino.actuators.map(item => `
+            <div class="module-card bg-white p-4 rounded-xl shadow-lg cursor-pointer" data-type="actuator" data-title="${item.title}">
+                <h4 class="text-xl font-bold text-gray-800 pointer-events-none">${item.title}</h4>
+            </div>
+        `).join('');
+
+        sensorsContainer.addEventListener('click', handleArduinoClick);
+        actuatorsContainer.addEventListener('click', handleArduinoClick);
+    }
+    
+    function handleArduinoClick(e) {
+        const card = e.target.closest('.module-card');
+        if (!card) return;
+
+        const type = card.dataset.type === 'sensor' ? 'sensors' : 'actuators';
+        const title = card.dataset.title;
+        const item = content.arduino[type].find(i => i.title === title);
+
+        if (item) {
+            showModal({
+                title: item.title,
+                description: item.desc,
+                example: item.example
+            });
+        }
+    }
+
 
     function onScroll() {
         let currentSection = '';
@@ -639,6 +720,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initAlgorithmBuilder();
     initScratchInterface();
     initRobotBuilder();
+    initArduinoModule();
     onScroll();
 });
 </script>
