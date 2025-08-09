@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Folleto Arduino para Zonas Rurales</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #e5e7eb;
+        }
+        .brochure-panel {
+            border-left: 2px dashed rgba(255, 255, 255, 0.2);
+        }
+        .brochure-panel:first-child {
+            border-left: none;
+        }
+        
+        .circuit-background {
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('https://i.imgur.com/esdhvsZ.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .text-shadow { text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6); }
+        .title-shadow { text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); }
+
+        /* --- ESTILOS PARA IMPRESIÓN Y PDF --- */
+        .pdf-page-break { page-break-before: always; }
+        @media print {
+            body { background: #fff !important; }
+            .print-hidden { display: none; }
+            .brochure-container { page-break-after: always; box-shadow: none !important; margin: 0 !important; }
+            .brochure-panel { border-left: none; }
+            .circuit-background { background: none !important; }
+            .text-shadow, .title-shadow { text-shadow: none !important; }
+            .print-text-black { color: #000 !important; }
+            .print-text-color { color: var(--print-color, #000) !important; }
+            @page { size: 21.6cm 33cm; margin: 0; }
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <div id="folleto-completo">
+        <!-- CARA EXTERIOR -->
+        <div id="cara-exterior" class="max-w-7xl mx-auto shadow-2xl rounded-lg overflow-hidden mb-12 brochure-container circuit-background">
+            <div class="grid grid-cols-3 h-full">
+                <!-- Panel Izquierdo (Solapa interior) -->
+                <div class="brochure-panel p-8 flex flex-col bg-black/10">
+                    <h3 class="text-2xl font-bold text-pink-300 mb-4 text-center title-shadow print-text-color" style="--print-color: #f9a8d4;">¿Por qué aprender a usar Arduino?</h3>
+                     <p class="text-white font-medium mb-4 text-justify text-shadow print-text-black">
+                        Aprender a usar Arduino es como obtener un superpoder: el de **crear tecnología con tus propias manos**. Te permite convertir tus ideas en inventos reales que pueden resolver problemas de tu comunidad.
+                    </p>
+                    <p class="text-white font-medium mb-4 text-justify text-shadow print-text-black">
+                        No solo aprendes sobre electrónica y programación, sino que desarrollas la creatividad y aprendes a pensar como un inventor. El proceso es más fácil de lo que crees:
+                    </p>
+                    <ul class="text-white font-medium space-y-3 text-left text-shadow print-text-black flex-grow">
+                        <li class="text-justify"><strong>1. La Idea:</strong> Piensas en algo que quieres crear o un problema que quieres solucionar.</li>
+                        <li class="text-justify"><strong>2. El Código:</strong> Escribes las instrucciones en un lenguaje sencillo en la computadora.</li>
+                        <li class="text-justify"><strong>3. La Conexión:</strong> Conectas sensores, luces o motores a tu placa Arduino.</li>
+                        <li class="text-justify"><strong>4. ¡La Magia!:</strong> Cargas el código a la placa y tu invento cobra vida.</li>
+                    </ul>
+                </div>
+
+                <!-- Panel Central (Contraportada) -->
+                <div class="brochure-panel p-8 flex flex-col text-center bg-black/10">
+                    <h3 class="text-2xl font-bold text-cyan-300 mb-4 text-center title-shadow print-text-color" style="--print-color: #22d3ee;">¿Qué es Arduino UNO?</h3>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/38/Arduino_Uno_-_R3.jpg" alt="Imagen de una placa Arduino UNO" class="rounded-lg shadow-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/400x200/2dd4bf/ffffff?text=Error+de+Imagen';">
+                    <p class="text-white font-medium text-justify text-shadow print-text-black">
+                        Imagina que es un pequeño cerebro programable. Le das instrucciones desde una computadora para que controle luces, motores y sensores. ¡Es la pieza central para dar vida a tus ideas!
+                    </p>
+                    <div class="mt-auto pt-4 border-t-2 border-gray-400">
+                        <img src="https://i.imgur.com/8LpJjRH.png" alt="Código QR para más recursos" class="mx-auto rounded-lg w-32 h-32" onerror="this.onerror=null;this.src='https://placehold.co/128x128/ffffff/3b82f6?text=Error';">
+                        <p class="font-semibold text-cyan-300 mt-2 text-center text-shadow print-text-color" style="--print-color: #22d3ee;">¡Escanea para más ideas!</p>
+                    </div>
+                </div>
+
+                <!-- Panel Derecho (Portada) -->
+                <div class="brochure-panel bg-gradient-to-b from-blue-800 to-orange-900/50 text-white p-8 flex flex-col justify-between items-center text-center">
+                    <img src="https://i.imgur.com/KmTqy0G.jpeg" alt="Logo EDISA" class="bg-white p-1 rounded-lg shadow-xl h-28" onerror="this.onerror=null;this.src='https://placehold.co/150x75/ffffff/3b82f6?text=EDISA';">
+                    <div>
+                        <h2 class="text-3xl font-bold leading-tight text-center title-shadow">¡Despierta tu Ingenio con Arduino!</h2>
+                        <div class="mt-8 mb-8 border-t-2 border-orange-300 w-1/3 mx-auto"></div>
+                        <p class="text-orange-200 font-semibold text-shadow">Ideas que Transforman tu Entorno</p>
+                    </div>
+                    <img src="https://i.imgur.com/zu7d2zz.jpeg" alt="Logo Iglesia Cristiana Jehova Edifica" class="p-1 rounded-lg shadow-xl h-24" onerror="this.onerror=null;this.src='https://placehold.co/150x75/ffffff/3b82f6?text=Iglesia';">
+                </div>
+            </div>
+        </div>
+
+        <!-- CARA INTERIOR -->
+        <div id="cara-interior" class="max-w-7xl mx-auto shadow-2xl rounded-lg overflow-hidden brochure-container circuit-background">
+            <div class="grid grid-cols-3 h-full">
+                <!-- Panel Izquierdo -->
+                <div class="brochure-panel p-8 bg-black/10 flex flex-col">
+                    <div>
+                        <h3 class="text-2xl font-bold text-pink-300 mb-4 text-center title-shadow print-text-color" style="--print-color: #f9a8d4;">Solucionando Problemas como un Inventor</h3>
+                         <p class="text-white font-medium mb-4 text-justify text-shadow print-text-black">
+                            ¡No te preocupes si algo no funciona a la primera! A todos los inventores les pasa. La clave es no rendirse. Aquí tienes algunos trucos:
+                        </p>
+                        <ul class="space-y-3 text-gray-200 mt-2 text-shadow print-text-black flex-grow">
+                            <li class="text-justify"><strong class="text-pink-300">1. Revisa los Cables:</strong> Asegúrate de que cada cable esté bien conectado en el pin correcto. Un cable suelto es el problema más común.</li>
+                            <li class="text-justify"><strong class="text-pink-300">2. Lee tu Código:</strong> Revisa las instrucciones que escribiste. A veces un punto y coma (;) olvidado o una palabra mal escrita puede detener todo.</li>
+                            <li class="text-justify"><strong class="text-pink-300">3. Prueba por Partes:</strong> ¿No funciona todo junto? Desconecta todo y prueba solo un componente. ¿Enciende el LED? ¿El sensor da lecturas? Así encuentras al culpable.</li>
+                            <li class="text-justify"><strong class="text-pink-300">4. Pide Ayuda:</strong> Pregúntale a un compañero o a tu profesor. ¡Dos cabezas piensan mejor que una!</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Panel Central -->
+                <div class="brochure-panel p-8 bg-black/10">
+                    <h3 class="text-2xl font-bold text-yellow-300 mb-4 text-center title-shadow print-text-color" style="--print-color: #facc15;">Un Mundo de Sensores</h3>
+                    <p class="text-white font-medium mb-4 text-justify text-shadow print-text-black">
+                        Los sensores son los "sentidos" de tu Arduino. Aquí tienes algunos de los más útiles:
+                    </p>
+                    <ul class="space-y-2 text-sm text-gray-200 mt-2 text-shadow print-text-black flex-grow">
+                        <li class="text-justify"><strong class="text-yellow-300">Humedad de Suelo:</strong> Mide si la tierra está seca o mojada.</li>
+                        <li class="text-justify"><strong class="text-yellow-300">Temperatura y Humedad (DHT11):</strong> Mide el calor y la humedad del aire.</li>
+                        <li class="text-justify"><strong class="text-yellow-300">Ultrasónico (HC-SR04):</strong> Mide distancias usando sonido.</li>
+                        <li class="text-justify"><strong class="text-yellow-300">Movimiento (PIR):</strong> Detecta el movimiento de personas o animales.</li>
+                        <li class="text-justify"><strong class="text-yellow-300">Luz (LDR):</strong> Mide la cantidad de luz en el ambiente.</li>
+                        <li class="text-justify"><strong class="text-yellow-300">Módulo Relé:</strong> Un interruptor para controlar aparatos de más potencia.</li>
+                        <li class="text-justify"><strong class="text-yellow-300">Sensor de Lluvia:</strong> Detecta si está lloviendo.</li>
+                        <li class="text-justify"><strong class="text-yellow-300">Servomotor:</strong> Un motor que gira a una posición exacta.</li>
+                        <li class="text-justify"><strong class="text-yellow-300">Bluetooth (HC-05):</strong> Permite controlar tu proyecto desde el celular.</li>
+                    </ul>
+                </div>
+
+                <!-- Panel Derecho -->
+                <div class="brochure-panel p-8 bg-black/10">
+                    <h3 class="text-2xl font-bold text-sky-300 mb-4 text-center title-shadow print-text-color" style="--print-color: #38bdf8;">¡Manos a la Obra!</h3>
+                    <div class="space-y-4">
+                        <!-- Proyecto 1 -->
+                        <div class="relative overflow-hidden rounded-lg bg-white p-4 shadow-sm">
+                            <div class="absolute inset-0 flex items-center justify-center text-[8rem] leading-none font-extrabold text-sky-100" style="z-index: 0;">1</div>
+                            <div class="relative z-10">
+                                <h4 class="font-semibold text-lg text-gray-800 text-center">Riego Automático</h4>
+                                <p class="text-gray-600 text-sm text-justify">Usa un sensor de humedad para activar una bomba de agua y regar tus plantas automáticamente.</p>
+                            </div>
+                        </div>
+                        <!-- Proyecto 2 -->
+                        <div class="relative overflow-hidden rounded-lg bg-white p-4 shadow-sm">
+                            <div class="absolute inset-0 flex items-center justify-center text-[8rem] leading-none font-extrabold text-sky-100" style="z-index: 0;">2</div>
+                            <div class="relative z-10">
+                                <h4 class="font-semibold text-lg text-gray-800 text-center">Alarma para Corrales</h4>
+                                <p class="text-gray-600 text-sm text-justify">Con un sensor de movimiento, crea una alarma con luces y sonido para proteger tus corrales.</p>
+                            </div>
+                        </div>
+                        <!-- Proyecto 3 -->
+                         <div class="relative overflow-hidden rounded-lg bg-white p-4 shadow-sm">
+                            <div class="absolute inset-0 flex items-center justify-center text-[8rem] leading-none font-extrabold text-sky-100" style="z-index: 0;">3</div>
+                            <div class="relative z-10">
+                                <h4 class="font-semibold text-lg text-gray-800 text-center">Medidor de Tanque</h4>
+                                <p class="text-gray-600 text-sm text-justify">Mide el nivel de un tanque con un sensor ultrasónico y muestra el resultado con luces LED de colores.</p>
+                            </div>
+                        </div>
+                        <!-- Proyecto 4 -->
+                         <div class="relative overflow-hidden rounded-lg bg-white p-4 shadow-sm">
+                            <div class="absolute inset-0 flex items-center justify-center text-[8rem] leading-none font-extrabold text-sky-100" style="z-index: 0;">4</div>
+                            <div class="relative z-10">
+                                <h4 class="font-semibold text-lg text-gray-800 text-center">Luz Automática</h4>
+                                <p class="text-gray-600 text-sm text-justify">Usa un sensor de luz (LDR) para que las luces de un camino o corral se enciendan solas al anochecer.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón para generar PDF -->
+    <div class="text-center mt-8 print-hidden">
+        <button id="download-pdf" class="bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-blue-700 transition-colors">
+            Descargar Folleto en PDF
+        </button>
+    </div>
+
+    <script>
+        document.getElementById('download-pdf').addEventListener('click', function () {
+            const button = this;
+            button.textContent = 'Generando PDF...';
+            button.disabled = true;
+            const element = document.getElementById('folleto-completo').cloneNode(true);
+            const exterior = element.querySelector('#cara-exterior');
+            const interior = element.querySelector('#cara-interior');
+            exterior.classList.remove('max-w-7xl', 'mx-auto', 'mb-12');
+            interior.classList.remove('max-w-7xl', 'mx-auto');
+            interior.classList.add('pdf-page-break');
+            const opt = {
+                margin: 0,
+                filename: 'folleto_arduino_rural.pdf',
+                image: { type: 'jpeg', quality: 1.0 },
+                html2canvas: { scale: 3, useCORS: true, logging: false },
+                jsPDF: { unit: 'mm', format: [330, 216], orientation: 'landscape' },
+                pagebreak: { mode: 'css', before: '.pdf-page-break' }
+            };
+            html2pdf().from(element).set(opt).save().then(() => {
+                button.textContent = 'Descargar Folleto en PDF';
+                button.disabled = false;
+            }).catch(err => {
+                console.error("Error al generar el PDF:", err);
+                button.textContent = 'Error al generar. Inténtalo de nuevo.';
+                button.disabled = false;
+            });
+        });
+    </script>
+
+</body>
+</html>
