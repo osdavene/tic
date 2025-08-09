@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Folleto TIC con Enfoque STEM+ (Para Imprimir)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #e5e7eb; /* Color de fondo gris claro para la página */
+        }
+        .brochure-panel {
+            border-left: 2px dashed rgba(255, 255, 255, 0.2);
+        }
+        .brochure-panel:first-child {
+            border-left: none;
+        }
+        
+        .circuit-background {
+            /* Se apila un gradiente negro semitransparente sobre la imagen para oscurecerla */
+            background: 
+                linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+                url('https://i.imgur.com/0lSXxGJ.jpeg');
+            background-size: cover;
+            background-position: center;
+        }
+        
+        .text-shadow {
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+        }
+        .title-shadow {
+             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+
+        /* --- ESTILOS PARA IMPRESIÓN Y PDF --- */
+        .pdf-page-break {
+            page-break-before: always;
+        }
+
+        @media print {
+            body {
+                background-image: none !important;
+                background-color: #fff !important;
+            }
+            .print-hidden {
+                display: none;
+            }
+            .brochure-container {
+                page-break-after: always;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+                margin-top: 0 !important;
+                margin-bottom: 0 !important;
+            }
+            .brochure-panel {
+                border-left: none;
+            }
+            .circuit-background {
+                background: none !important;
+            }
+            .text-shadow, .title-shadow {
+                text-shadow: none !important;
+            }
+            /* Se revierten los colores para impresión */
+            .print-text-black { color: #000 !important; }
+            .print-text-color { color: var(--print-color, #000) !important; }
+            
+            @page {
+                size: 21.6cm 33cm; /* Tamaño Oficio Colombia */
+                /* size: letter landscape; */ /* Alternativa: Tamaño Carta */
+                margin: 0;
+            }
+        }
+    </style>
+</head>
+<body class="p-4 sm:p-8">
+
+    <div id="folleto-completo-tic">
+        <!-- CARA EXTERIOR -->
+        <div id="cara-exterior-tic" class="max-w-7xl mx-auto shadow-2xl rounded-lg overflow-hidden mb-12 brochure-container circuit-background">
+            <div class="grid grid-cols-3 h-full">
+
+                <!-- Panel Izquierdo (Solapa que se dobla hacia adentro) -->
+                <div class="brochure-panel p-8 flex flex-col bg-black/10">
+                    <h3 class="text-2xl font-bold text-purple-300 mb-4 text-center title-shadow print-text-color" style="--print-color: #a855f7;">¿Qué son las TIC?</h3>
+                    <p class="text-white font-medium mb-4 text-justify text-shadow print-text-black">
+                        Son las <strong>Tecnologías de la Información y Comunicación</strong>. Engloban todas las herramientas que nos permiten crear, almacenar y compartir información digital, como internet, móviles y computadoras.
+                    </p>
+                    <p class="text-white font-medium mb-4 text-justify text-shadow print-text-black">
+                       El aprendizaje de las <strong>TIC mediado por el enfoque STEM+</strong> nos da las herramientas para investigar, diseñar y construir soluciones innovadoras.
+                    </p>
+                    <img src="https://i.imgur.com/7A6UN9U.jpeg" alt="Imagen de iconos de tecnología y comunicación conectados en red" class="rounded-lg shadow-md mt-auto" onerror="this.onerror=null;this.src='https://placehold.co/400x300/9333ea/ffffff?text=Error+de+Imagen';">
+                </div>
+
+                <!-- Panel Central (Contraportada del folleto) -->
+                <div class="brochure-panel p-8 flex flex-col text-center bg-black/10">
+                    <h3 class="text-2xl font-bold text-purple-300 mb-4 text-center title-shadow print-text-color" style="--print-color: #a855f7;">¿Qué es el enfoque STEM+?</h3>
+                     <ul class="text-white font-medium space-y-2 text-left text-shadow print-text-black">
+                        <li><strong>S</strong> - Ciencia</li>
+                        <li><strong>T</strong> - Tecnología</li>
+                        <li><strong>E</strong> - Ingeniería</li>
+                        <li><strong>M</strong> - Matemáticas</li>
+                        <li><strong>+</strong> - Artes y Creatividad</li>
+                     </ul>
+                     <p class="text-white font-medium mt-4 text-justify text-shadow print-text-black">
+                        Integra estas áreas para resolver problemas reales, fomentando la creatividad, el pensamiento crítico y el trabajo en equipo.
+                     </p>
+                     <p class="text-white font-medium mt-4 text-justify text-shadow print-text-black">
+                        Este enfoque práctico se puede aplicar en cualquier asignatura, conectando el aprendizaje con situaciones cotidianas y desafíos del entorno.
+                     </p>
+                    <div class="mt-auto pt-4 border-t-2 border-gray-400">
+                        <img src="https://i.imgur.com/8LpJjRH.png" alt="Código QR para más recursos" class="mx-auto rounded-lg w-32 h-32" onerror="this.onerror=null;this.src='https://placehold.co/128x128/ffffff/3b82f6?text=Error';">
+                        <p class="font-semibold text-purple-300 mt-2 text-center text-shadow print-text-color" style="--print-color: #a855f7;">¡Escanea para más ideas!</p>
+                    </div>
+                </div>
+
+                <!-- Panel Derecho (Portada del folleto cuando está plegado) -->
+                <div class="brochure-panel bg-gradient-to-b from-blue-800 to-orange-900/50 text-white p-8 flex flex-col justify-between items-center text-center">
+                    <img src="https://i.imgur.com/KmTqy0G.jpeg" alt="Logo EDISA" class="bg-white p-1 rounded-lg shadow-xl h-28" onerror="this.onerror=null;this.src='https://placehold.co/150x75/ffffff/3b82f6?text=EDISA';">
+                    
+                    <div>
+                        <h2 class="text-3xl font-bold leading-tight text-center title-shadow">TIC mediado por el enfoque STEM+</h2>
+                        <div class="mt-8 mb-8 border-t-2 border-orange-300 w-1/3 mx-auto"></div>
+                        <p class="text-orange-200 font-semibold text-shadow">Crea, Innova y Transforma el Futuro</p>
+                    </div>
+
+                    <img src="https://i.imgur.com/zu7d2zz.jpeg" alt="Logo Iglesia Cristiana Jehova Edifica" class="p-1 rounded-lg shadow-xl h-24" onerror="this.onerror=null;this.src='https://placehold.co/150x75/ffffff/3b82f6?text=Iglesia';">
+                </div>
+
+            </div>
+        </div>
+
+        <!-- CARA INTERIOR -->
+        <div id="cara-interior-tic" class="max-w-7xl mx-auto shadow-2xl rounded-lg overflow-hidden brochure-container circuit-background">
+            <div class="grid grid-cols-3 h-full">
+
+                <!-- Panel Izquierdo -->
+                <div class="brochure-panel p-8 bg-black/10">
+                    <h3 class="text-2xl font-bold text-teal-300 mb-4 text-center title-shadow print-text-color" style="--print-color: #14b8a6;">Tu Laboratorio con Arduino UNO</h3>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/3/38/Arduino_Uno_-_R3.jpg" alt="Imagen de una placa Arduino UNO" class="rounded-lg shadow-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/400x200/2dd4bf/ffffff?text=Error+de+Imagen';">
+                    <p class="text-white font-medium mb-4 text-justify text-shadow print-text-black">
+                        El <strong>Arduino UNO</strong> es una placa electrónica ideal para empezar. Es como un mini-cerebro que puedes programar para que controle sensores y motores, interactuando con el mundo físico.
+                    </p>
+                    <h4 class="font-semibold text-teal-300 text-center text-shadow print-text-color" style="--print-color: #14b8a6;">¿Qué puedes crear para el campo?</h4>
+                    <ul class="list-disc list-inside space-y-1 text-gray-200 mt-2 text-shadow print-text-black">
+                        <li class="text-justify"><strong>Incubadora de huevos:</strong> Controla la temperatura y humedad para mejorar la producción avícola.</li>
+                        <li class="text-justify"><strong>Monitor de cultivos:</strong> Mide variables clave del suelo y del ambiente para optimizar el crecimiento.</li>
+                        <li class="text-justify"><strong>Alarma para corrales:</strong> Usa sensores de movimiento para proteger al ganado de depredadores o intrusos.</li>
+                        <li class="text-justify"><strong>Control de portones:</strong> Abre y cierra las puertas de un corral o finca de forma remota.</li>
+                    </ul>
+                </div>
+
+                <!-- Panel Central -->
+                <div class="brochure-panel p-8 bg-black/10 flex flex-col">
+                     <div class="flex-grow">
+                        <h3 class="text-2xl font-bold text-amber-300 mb-4 text-center title-shadow print-text-color" style="--print-color: #f59e0b;">Plataformas Virtuales</h3>
+                        <img src="https://i.imgur.com/IEoL4iI.jpeg" alt="Logos de plataformas virtuales educativas" class="rounded-lg shadow-md mb-4" onerror="this.onerror=null;this.src='https://placehold.co/400x200/f59e0b/ffffff?text=Error+de+Imagen';">
+                        <p class="text-white font-medium mb-4 text-justify text-shadow print-text-black">
+                            Usa estas herramientas para organizar, diseñar y presentar tus ideas de una manera profesional y creativa.
+                        </p>
+                        <ul class="space-y-3 text-gray-200 mt-2 text-shadow print-text-black">
+                            <li class="text-justify"><strong class="text-amber-300">Google Classroom:</strong> Ideal para organizar tu proyecto. Puedes crear una clase, asignar tareas, compartir documentos y recibir retroalimentación.</li>
+                            <li class="text-justify"><strong class="text-amber-300">Canva para Educación:</strong> Perfecta para el diseño. Crea guías visuales, afiches, infografías y presentaciones impactantes para mostrar tus proyectos.</li>
+                            <li class="text-justify"><strong class="text-amber-300">Genially:</strong> La mejor para la interactividad. Diseña juegos, líneas de tiempo y presentaciones dinámicas para que otros exploren y aprendan de tu creación.</li>
+                            <li class="text-justify"><strong class="text-amber-300">Tinkercad:</strong> Esencial para el diseño 3D y la simulación. Puedes crear modelos para imprimir en 3D y probar tus circuitos de Arduino antes de montarlos.</li>
+                        </ul>
+                     </div>
+                     <div class="mt-auto pt-4">
+                        <p class="text-center text-amber-200 text-sm text-shadow print-text-black">¡Y muchas más herramientas por descubrir!</p>
+                     </div>
+                </div>
+
+                <!-- Panel Derecho -->
+                <div class="brochure-panel p-8 bg-black/10">
+                    <h3 class="text-2xl font-bold text-blue-300 mb-4 text-center title-shadow print-text-color" style="--print-color: #3b82f6;">¡Manos a la Obra! Proyectos Rurales</h3>
+                    <p class="text-white font-medium mb-6 text-justify text-shadow print-text-black">
+                        Aplica tus conocimientos para resolver problemas reales en tu comunidad. ¡Aquí tienes algunas ideas!
+                    </p>
+                    <div class="space-y-6">
+                        <!-- Proyecto 1 -->
+                        <div class="relative overflow-hidden rounded-lg bg-white p-4 shadow-sm">
+                            <div class="absolute inset-0 flex items-center justify-center text-[10rem] leading-none font-extrabold text-blue-100" style="z-index: 0;">1</div>
+                            <div class="relative z-10">
+                                <h4 class="font-semibold text-lg text-gray-800 text-center">Riego Automático Inteligente</h4>
+                                <p class="text-gray-600 text-justify">Usa un sensor de humedad en la tierra para que Arduino active una bomba de agua solo cuando el cultivo lo necesite. ¡Ahorra agua y esfuerzo!</p>
+                            </div>
+                        </div>
+                        <!-- Proyecto 2 -->
+                        <div class="relative overflow-hidden rounded-lg bg-white p-4 shadow-sm">
+                            <div class="absolute inset-0 flex items-center justify-center text-[10rem] leading-none font-extrabold text-blue-100" style="z-index: 0;">2</div>
+                            <div class="relative z-10">
+                                <h4 class="font-semibold text-lg text-gray-800 text-center">Dispensador de Alimento</h4>
+                                <p class="text-gray-600 text-justify">Programa un sistema que libere comida para gallinas o peces a horas específicas. Diseña una interfaz simple para ajustar los horarios.</p>
+                            </div>
+                        </div>
+                        <!-- Proyecto 3 -->
+                         <div class="relative overflow-hidden rounded-lg bg-white p-4 shadow-sm">
+                            <div class="absolute inset-0 flex items-center justify-center text-[10rem] leading-none font-extrabold text-blue-100" style="z-index: 0;">3</div>
+                            <div class="relative z-10">
+                                <h4 class="font-semibold text-lg text-gray-800 text-center">Alerta de Nivel de Agua</h4>
+                                <p class="text-gray-600 text-justify">Monitorea el nivel de agua en un tanque o pozo con un sensor. Cuando el nivel sea bajo, activa una luz o un sonido como alerta visual para la comunidad.</p>
+                            </div>
+                        </div>
+                        <!-- Proyecto 4 -->
+                         <div class="relative overflow-hidden rounded-lg bg-white p-4 shadow-sm">
+                            <div class="absolute inset-0 flex items-center justify-center text-[10rem] leading-none font-extrabold text-blue-100" style="z-index: 0;">4</div>
+                            <div class="relative z-10">
+                                <h4 class="font-semibold text-lg text-gray-800 text-center">Estación Meteorológica Básica</h4>
+                                <p class="text-gray-600 text-justify">Mide la temperatura y humedad del ambiente. Puedes mostrar los datos en una pantalla LCD y ayudar a predecir condiciones para los cultivos.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <!-- Botón para generar PDF -->
+    <div class="text-center mt-8 print-hidden">
+        <button id="download-pdf-tic" class="bg-blue-600 text-white font-bold py-3 px-6 rounded-lg shadow-lg hover:bg-blue-700 transition-colors">
+            Descargar Folleto en PDF
+        </button>
+    </div>
+
+    <script>
+        document.getElementById('download-pdf-tic').addEventListener('click', function () {
+            const button = this;
+            button.textContent = 'Generando PDF...';
+            button.disabled = true;
+            const element = document.getElementById('folleto-completo-tic').cloneNode(true);
+            const exterior = element.querySelector('#cara-exterior-tic');
+            const interior = element.querySelector('#cara-interior-tic');
+            exterior.classList.remove('max-w-7xl', 'mx-auto', 'mb-12');
+            interior.classList.remove('max-w-7xl', 'mx-auto');
+            interior.classList.add('pdf-page-break');
+            const opt = {
+                margin: 0,
+                filename: 'folleto_tic_stem.pdf',
+                image: { type: 'jpeg', quality: 1.0 },
+                html2canvas: { scale: 3, useCORS: true, logging: false },
+                jsPDF: { unit: 'mm', format: [330, 216], orientation: 'landscape' },
+                pagebreak: { mode: 'css', before: '.pdf-page-break' }
+            };
+            html2pdf().from(element).set(opt).save().then(() => {
+                button.textContent = 'Descargar Folleto en PDF';
+                button.disabled = false;
+            }).catch(err => {
+                console.error("Error al generar el PDF:", err);
+                button.textContent = 'Error al generar. Inténtalo de nuevo.';
+                button.disabled = false;
+            });
+        });
+    </script>
+
+</body>
+</html>
