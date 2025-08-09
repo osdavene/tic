@@ -14,7 +14,7 @@
         - Module 3 (Software): Goal: Compare/Test -> Method: Visual examples with clickable images and icons for definitions. Interaction: Users can click images/icons for more info. Justification: Provides clear visual separation and retains interactive definitions.
         - Module 4 (Security): Goal: Test/Reinforce -> Method: Interactive quiz with immediate feedback. Interaction: Users answer safety scenarios. Justification: Active recall improves memory.
         - Module 5 (Comp. Thinking): Goal: Apply/Organize -> Method: Interactive algorithm builder. Interaction: Users order steps to solve a problem. Justification: Demonstrates the importance of sequence.
-        - Module 6 (Scratch): Goal: Demonstrate/Inform -> Method: Clickable infographic of the Scratch interface. Interaction: Click parts to learn their function. Justification: Deconstructs a complex UI.
+        - Module 6 (Scratch): Goal: Demonstrate/Inform -> Method: A multi-part interactive module including a block explorer and an interface diagram. Interaction: Click block categories to see examples; click areas on an interface screenshot for definitions. Justification: Provides a richer, more in-depth learning experience than a single element.
         - Module 7 (Arduino): Goal: Inform/Prepare -> Method: Interactive definitions of electronic components. Interaction: Users learn about sensors and actuators with examples. Justification: Builds foundational knowledge for the final robotics project.
         - Module 8 (Robotics): Goal: Synthesize/Apply -> Method: "Robot Builder" tool. Interaction: Users apply all learned concepts to design a robot. Justification: Serves as a capstone project, integrating all modules.
     -->
@@ -82,6 +82,11 @@
         .computer-part:hover {
             transform: scale(1.1);
             background-color: rgba(100, 181, 246, 1);
+        }
+        .scratch-block-category.active {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            color: white;
         }
     </style>
 </head>
@@ -208,19 +213,37 @@
         <!-- Module 6: Programming with Scratch -->
         <section id="scratch" class="min-h-screen py-16">
             <h2 class="section-title text-4xl font-bold text-gray-800">¡A Programar con Scratch!</h2>
-            <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto text-justify">Programar es darle instrucciones a una computadora. Con **Scratch**, lo haces uniendo bloques de colores, ¡como si fueran Legos! Explora la interfaz de Scratch haciendo clic en las diferentes áreas para ver qué hacen.</p>
+            <p class="mt-4 text-lg text-gray-600 max-w-3xl mx-auto text-justify">Programar es darle instrucciones a una computadora. Con **Scratch**, lo haces uniendo bloques de colores, ¡como si fueran Legos! A continuación, explora los tipos de bloques y la interfaz para empezar a crear.</p>
 
-            <div class="mt-12 p-4 bg-white rounded-xl shadow-lg relative max-w-4xl mx-auto">
-                <img src="https://i.imgur.com/uFT5j7L.jpeg" alt="Interfaz de Scratch" class="w-full h-auto rounded-lg">
-                <!-- Clickable areas for Scratch interface -->
-                <div data-info="Paleta de Bloques" data-desc="Contiene todas las instrucciones (movimiento, apariencia, sonido, etc.) que puedes usar. Están organizadas por colores." class="scratch-area absolute border-2 border-dashed border-green-500 hover:bg-green-500/20 cursor-pointer" style="top: 15%; left: 2%; width: 22%; height: 75%;"></div>
-                <div data-info="Área de Programa" data-desc="Aquí arrastras y unes los bloques de la paleta para crear el 'código' o las instrucciones que seguirá tu Sprite." class="scratch-area absolute border-2 border-dashed border-yellow-500 hover:bg-yellow-500/20 cursor-pointer" style="top: 15%; left: 25%; width: 33%; height: 75%;"></div>
-                <div data-info="Escenario" data-desc="Aquí es donde tus personajes (Sprites) cobran vida y ocurre toda la acción de tu historia o juego." class="scratch-area absolute border-2 border-dashed border-red-500 hover:bg-red-500/20 cursor-pointer" style="top: 15%; left: 60%; width: 38%; height: 55%;"></div>
-                <div data-info="Sprite" data-desc="Es tu personaje u objeto. Puedes cambiar su apariencia (disfraz), moverlo y hacer que interactúe." class="scratch-area absolute border-2 border-dashed border-blue-500 hover:bg-blue-500/20 cursor-pointer" style="top: 72%; left: 60%; width: 38%; height: 20%;"></div>
-                <div id="scratch-info-box" class="absolute top-0 left-0 bg-black/70 text-white p-4 rounded-lg hidden">
-                    <h4 id="scratch-info-title" class="font-bold"></h4>
-                    <p id="scratch-info-desc"></p>
+            <div class="mt-12 bg-white p-6 rounded-xl shadow-lg">
+                <h3 class="text-2xl font-bold text-gray-700 text-center mb-4">Explorador de Bloques</h3>
+                <div id="scratch-block-categories" class="flex flex-wrap justify-center gap-2 md:gap-4 mb-4">
+                    <!-- Block categories will be injected here by JS -->
                 </div>
+                <div id="scratch-block-examples" class="p-4 bg-gray-50 rounded-lg min-h-[150px]">
+                    <!-- Block examples will be shown here -->
+                </div>
+            </div>
+
+            <div class="mt-12">
+                <h3 class="text-2xl font-bold text-gray-700 text-center mb-4">Explora la Interfaz</h3>
+                <div class="p-4 bg-white rounded-xl shadow-lg relative max-w-4xl mx-auto">
+                    <img src="https://i.imgur.com/uFT5j7L.jpeg" alt="Interfaz de Scratch" class="w-full h-auto rounded-lg">
+                    <!-- Clickable areas for Scratch interface -->
+                    <div data-info="Paleta de Bloques" data-desc="Contiene todas las instrucciones (movimiento, apariencia, sonido, etc.) que puedes usar. Están organizadas por colores." class="scratch-area absolute border-2 border-dashed border-green-500 hover:bg-green-500/20 cursor-pointer" style="top: 15%; left: 2%; width: 22%; height: 75%;"></div>
+                    <div data-info="Área de Programa" data-desc="Aquí arrastras y unes los bloques de la paleta para crear el 'código' o las instrucciones que seguirá tu Sprite." class="scratch-area absolute border-2 border-dashed border-yellow-500 hover:bg-yellow-500/20 cursor-pointer" style="top: 15%; left: 25%; width: 33%; height: 75%;"></div>
+                    <div data-info="Escenario" data-desc="Aquí es donde tus personajes (Sprites) cobran vida y ocurre toda la acción de tu historia o juego." class="scratch-area absolute border-2 border-dashed border-red-500 hover:bg-red-500/20 cursor-pointer" style="top: 15%; left: 60%; width: 38%; height: 55%;"></div>
+                    <div data-info="Sprite" data-desc="Es tu personaje u objeto. Puedes cambiar su apariencia (disfraz), moverlo y hacer que interactúe." class="scratch-area absolute border-2 border-dashed border-blue-500 hover:bg-blue-500/20 cursor-pointer" style="top: 72%; left: 60%; width: 38%; height: 20%;"></div>
+                    <div id="scratch-info-box" class="absolute top-0 left-0 bg-black/70 text-white p-4 rounded-lg hidden">
+                        <h4 id="scratch-info-title" class="font-bold"></h4>
+                        <p id="scratch-info-desc"></p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 p-4 rounded-lg max-w-4xl mx-auto">
+              <h4 class="font-bold">¡Tu Primer Mini-Proyecto!</h4>
+              <p>Intenta hacer que el gato de Scratch camine de un lado a otro de la pantalla y diga "¡Hola, Tierralta!" cuando hagas clic en la bandera verde.</p>
             </div>
         </section>
 
@@ -391,6 +414,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 { title: 'Servomotor', desc: 'Es un tipo especial de motor que permite controlar la posición angular de su eje con gran precisión. En lugar de girar continuamente, puedes ordenarle que se mueva a un ángulo específico (por ejemplo, 90 grados) y se mantenga firme en esa posición.', example: 'Ejemplo de uso: Crear el brazo de un robot que pueda subir y bajar para recoger un objeto pequeño.' },
                 { title: 'Diodo LED', desc: 'Un LED (Diodo Emisor de Luz) es un componente electrónico que emite luz cuando la corriente pasa a través de él. Son muy eficientes y vienen en muchos colores. Son el primer paso ideal para aprender a controlar salidas con Arduino.', example: 'Ejemplo de uso: Programar una secuencia de luces intermitentes, como las de un semáforo o las luces de un auto fantástico.' },
                 { title: 'Zumbador (Buzzer)', desc: 'Es un pequeño altavoz que produce sonidos o pitidos a una frecuencia determinada. Puede ser pasivo (necesita una señal oscilante para sonar) o activo (suena con solo recibir energía). Es excelente para dar retroalimentación auditiva.', example: 'Ejemplo de uso: Diseñar una alarma para tu habitación que suene si un sensor de distancia detecta que alguien se acerca a la puerta.' }
+            ]
+        },
+        scratch: {
+            blocks: [
+                { category: 'Movimiento', color: 'bg-blue-500', examples: [ { name: 'mover 10 pasos', desc: 'Hace que tu personaje avance en la dirección en la que está mirando.'}, { name: 'girar 15 grados', desc: 'Rota a tu personaje en el sentido de las agujas del reloj.'} ] },
+                { category: 'Apariencia', color: 'bg-purple-500', examples: [ { name: 'decir Hola! por 2 segundos', desc: 'Muestra una burbuja de diálogo con un mensaje.'}, { name: 'siguiente disfraz', desc: 'Cambia la imagen del personaje a la siguiente en su lista de disfraces, creando animaciones.'} ] },
+                { category: 'Sonido', color: 'bg-pink-500', examples: [ { name: 'tocar sonido Miau', desc: 'Reproduce un sonido hasta que termine.'}, { name: 'fijar volumen al 100%', desc: 'Ajusta el volumen de los sonidos del proyecto.'} ] },
+                { category: 'Eventos', color: 'bg-yellow-500', examples: [ { name: 'al presionar bandera verde', desc: 'Es el bloque más importante. Inicia el programa cuando se hace clic en la bandera verde.'}, { name: 'al presionar tecla espacio', desc: 'Activa una secuencia de bloques cuando se presiona una tecla específica.'} ] },
+                { category: 'Control', color: 'bg-orange-500', examples: [ { name: 'esperar 1 segundo', desc: 'Pausa el programa por un tiempo determinado.'}, { name: 'repetir 10', desc: 'Ejecuta los bloques que están dentro de él un número específico de veces (un bucle).'} ] }
             ]
         }
     };
@@ -611,12 +643,15 @@ document.addEventListener('DOMContentLoaded', function () {
         renderPool();
     }
 
-    function initScratchInterface() {
+    function initScratchModule() {
         const areas = document.querySelectorAll('.scratch-area');
         const infoBox = document.getElementById('scratch-info-box');
         const titleEl = document.getElementById('scratch-info-title');
         const descEl = document.getElementById('scratch-info-desc');
+        const categoriesContainer = document.getElementById('scratch-block-categories');
+        const examplesContainer = document.getElementById('scratch-block-examples');
 
+        // Interface Diagram Logic
         areas.forEach(area => {
             area.addEventListener('click', (e) => {
                 titleEl.textContent = area.dataset.info;
@@ -629,6 +664,41 @@ document.addEventListener('DOMContentLoaded', function () {
                 infoBox.classList.add('hidden');
             });
         });
+
+        // Block Explorer Logic
+        content.scratch.blocks.forEach(cat => {
+            const btn = document.createElement('button');
+            btn.textContent = cat.category;
+            btn.className = `scratch-block-category px-4 py-2 rounded-full font-semibold text-white transition ${cat.color}`;
+            btn.dataset.category = cat.category;
+            categoriesContainer.appendChild(btn);
+        });
+
+        categoriesContainer.addEventListener('click', e => {
+            if (e.target.tagName !== 'BUTTON') return;
+            
+            document.querySelectorAll('.scratch-block-category').forEach(btn => {
+                btn.classList.remove('active');
+                const originalColor = content.scratch.blocks.find(c => c.category === btn.dataset.category).color;
+                btn.style.backgroundColor = '';
+            });
+
+            const categoryName = e.target.dataset.category;
+            const categoryData = content.scratch.blocks.find(c => c.category === categoryName);
+            
+            e.target.classList.add('active');
+            e.target.style.backgroundColor = '#333';
+
+            examplesContainer.innerHTML = categoryData.examples.map(ex => `
+                <div class="mb-2">
+                    <p class="font-bold ${categoryData.color.replace('bg-','text-')}">${ex.name}</p>
+                    <p class="text-sm text-gray-600">${ex.desc}</p>
+                </div>
+            `).join('');
+        });
+
+        // Show first category by default
+        categoriesContainer.querySelector('button').click();
     }
 
     function initRobotBuilder() {
@@ -718,7 +788,7 @@ document.addEventListener('DOMContentLoaded', function () {
     initSoftwareSection();
     initQuiz();
     initAlgorithmBuilder();
-    initScratchInterface();
+    initScratchModule();
     initRobotBuilder();
     initArduinoModule();
     onScroll();
